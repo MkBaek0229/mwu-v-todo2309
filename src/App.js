@@ -19,23 +19,26 @@ export default function App({$target}) {
             text: '운동하기',
             checked : true
           },
-    
-    
-    
-    "공부", "운동", "밥"]
+        ]
+
+
+        let lastId = Myroutine[Myroutine.length -1].id;
+      
+   
    
     const onSumbit = (text) => {
         const nextState = todoList.state.concat(
           [
             {
-              id: 4,
+              id: lastId + 1,
               text,
               checked: false
             }
           ]
-        )
+        ) 
          todoList.setState(nextState);
-         console.log(todoList.state)
+         lastId++;
+         console.log(todoList.state);
          
        }
        
@@ -44,10 +47,18 @@ export default function App({$target}) {
       todoList.setState(nextState)
     }
 
+    const onToggle = (id) => {
+      const nextState = todoList.state.map(todo => 
+        todo.id === id ? {...todo, checked: !todo.checked} : todo
+        );
+      todoList.setState(nextState)
+    }
+
        const header = new Header({$target});
 
        new TodoForm({$target, onSumbit});
 
-       const todoList = new TodoList({$target, Myroutine, onDelete});
+  
+       const todoList = new TodoList({$target, Myroutine, onDelete, onToggle});
 }
  
