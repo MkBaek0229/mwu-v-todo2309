@@ -12,15 +12,13 @@ export default function TodoList({$target, Myroutine, onDelete, onToggle}) {
         if (e.target.classList.contains("del_btn")) {
             const id = parseInt(e.target.getAttribute("data-id"))
             onDelete(id)
-        }
-    })
-
-    $list.addEventListener("click", e=> {
-        if (e.target.classList.contains("toggle_checkbox")) {
+        } else if (e.target.classList.contains("toggle_checkbox")) {
             const id = parseInt(e.target.getAttribute("data-id"))
             onToggle(id)
         }
     })
+
+
     this.render = () => {
         $list.innerHTML = `
         <ul>
